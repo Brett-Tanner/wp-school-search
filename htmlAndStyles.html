@@ -1,0 +1,40 @@
+<style></style>
+
+<div style="display: flex; gap: 1.5rem">
+  <h4 class="page-subtitle3 search" style="margin-top: 50px">地域から探す</h4>
+  <input
+    class="page-subtitle3 search"
+    id="brett-search"
+    style="margin-top: 50px; flex-grow: 1; border-radius: 1rem"
+    type="search"
+    placeholder="スクール名検索、住所検索、電話番号検索、エリア検索"
+  />
+</div>
+
+<script defer>
+  const searchInput = document.getElementById("brett-search");
+  const schools = document.querySelectorAll(".school-list-wrapper");
+  let query = "";
+
+  searchInput.addEventListener("input", (e) => {
+    query = e.target.value;
+    search(query);
+  });
+
+  function search(query) {
+    schools.forEach((school) => {
+      const name = school.querySelector(".school-name").innerText;
+      const infoSection = school.querySelector(".school-info");
+      const infoArray = [];
+      infoSection
+        .querySelectorAll(".p_normal-otherpage")
+        .forEach((node) => infoArray.push(node.innerText));
+      info = infoArray.join();
+      if (name.includes(query) || info.includes(query)) {
+        school.style.display = "block";
+      } else {
+        school.style.display = "none";
+      }
+    });
+  }
+</script>
