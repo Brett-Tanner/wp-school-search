@@ -1,11 +1,64 @@
-<style></style>
+<style>
+  #brett-search-wrapper {
+    align-items: center !important;
+    background-color: rgb(255 255 255) !important;
+    border-radius: 0.25rem !important;
+    border-width: 1px !important;
+    box-shadow: inset 0 0 0 1px var(--ku-secondary);
+    color: rgb(15 23 42) !important;
+    display: flex !important;
+    gap: 0.5rem !important;
+    margin-top: 50px;
+    width: 100% !important;
+  }
 
-<div style="display: flex; gap: 1.5rem">
-  <h4 class="page-subtitle3 search" style="margin-top: 50px">地域から探す</h4>
+  #brett-search-label {
+    margin: 0;
+  }
+
+  #brett-search {
+    -webkit-appearance: textfield;
+    border: none;
+    border-radius: 0.25rem !important;
+    box-shadow: inset 0 0 0 1px rgb(145, 135, 121);
+    color: inherit;
+    color: rgb(112 112 134) !important;
+    flex-grow: 1;
+    font-family: inherit;
+    font-feature-settings: inherit;
+    font-size: 100%;
+    font-variation-settings: inherit;
+    font-weight: 400 !important;
+    line-height: inherit;
+    margin: 0;
+    opacity: 1;
+    outline-offset: -2px;
+    padding: 0.25rem !important;
+
+    &:focus {
+      outline: 2px solid #ef8200;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    #brett-search-wrapper {
+      flex-direction: column;
+      justify-content: start;
+      gap: 1rem !important;
+    }
+
+    #brett-search {
+      font-size: calc(22px + 0.390625vw);
+      width: 100%;
+    }
+  }
+</style>
+
+<div id="brett-search-wrapper">
+  <h4 id="brett-search-label" class="page-subtitle3 search">地域から探す</h4>
   <input
     class="page-subtitle3 search"
     id="brett-search"
-    style="margin-top: 50px; flex-grow: 1; border-radius: 1rem"
     type="search"
     placeholder="スクール名検索、住所検索、電話番号検索、エリア検索"
   />
@@ -31,7 +84,7 @@
         .forEach((node) => infoArray.push(node.innerText));
       info = infoArray.join();
       if (name.includes(query) || info.includes(query)) {
-        school.style.display = "block";
+        school.style.display = "flex";
       } else {
         school.style.display = "none";
       }
