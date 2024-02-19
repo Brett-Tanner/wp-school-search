@@ -67,6 +67,7 @@
 <script defer>
   const searchInput = document.getElementById("brett-search");
   const schools = document.querySelectorAll(".school-list-wrapper");
+  const areas = [...document.querySelectorAll(".page-subtitle5")];
   let query = "";
 
   searchInput.addEventListener("input", (e) => {
@@ -75,6 +76,11 @@
   });
 
   function search(query) {
+    hideSchools(query);
+    hideAreas();
+  }
+
+  function hideSchools(query) {
     schools.forEach((school) => {
       const name = school.querySelector(".school-name").innerText;
       const infoSection = school.querySelector(".school-info");
@@ -87,6 +93,20 @@
         school.style.display = "flex";
       } else {
         school.style.display = "none";
+      }
+    });
+  }
+
+  function hideAreas() {
+    areas.forEach((area) => {
+      if (
+        [...area.nextElementSibling.children].find((child) =>
+          child.checkVisibility(),
+        )
+      ) {
+        area.style.display = "block";
+      } else {
+        area.style.display = "none";
       }
     });
   }
