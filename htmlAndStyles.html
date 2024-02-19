@@ -78,6 +78,7 @@
   function search(query) {
     hideSchools(query);
     hideAreas();
+    hidePrefectures();
   }
 
   function hideSchools(query) {
@@ -109,5 +110,34 @@
         area.style.display = "none";
       }
     });
+  }
+
+  function hidePrefectures() {
+    let activeArticle = document.querySelector("article.tabContent.active");
+    let children = [...activeArticle.children].filter((child) =>
+      ["H4", "H5"].includes(child.nodeName),
+    );
+    children.forEach((child, index) => {
+      if (!child.classList.contains("mappin")) {
+        return;
+      }
+
+      if (noSubHeadings(child, children[index + 1], children)) {
+        child.style.display = "none";
+      } else {
+        child.style.display = "block";
+      }
+    });
+  }
+
+  function noSubHeadings(currentNode, nextNode, children) {
+    if (!nextNode || nextNode.nodeName === "H4") return true;
+    if (nextNode.checkVisibility()) return false;
+
+    return noSubHeadings(
+      currentNode,
+      children[children.indexOf(currentNode + 1)],
+      children,
+    );
   }
 </script>
